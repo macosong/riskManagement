@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="nju.agile.riskmanagement.FalseMapper">
+
+<resultMap id="falseEnterDetail" type="nju.agile.riskmanagement.pojo.FalseEnterInfo">
+<id column="false_enter_id" property="falseEnterId" jdbcType="INTEGER"/>
+<result column="taxPayer_id" property="taxPayerId" jdbcType="INTEGER"/>
+<result column="taxPayer_name" property="taxPayerName" jdbcType="VARCHAR"/>
+<result column="false_month" property="falseMonth" jdbcType="VARCHAR"/>
+<result column="false_amount" property="falseAmount" jdbcType="VARCHAR"/>
+</resultMap>
+
+<resultMap type="nju.agile.riskmanagement.pojo.FalsePurInfo" id="falsePurDetail">
+<id column="false_pur_id" property="falsePurId" jdbcType="INTEGER"/>
+<result column="taxPayer_id" property="taxPayerId" jdbcType="INTEGER"/>
+<result column="invoice_id" property="invoiceId" jdbcType="INTEGER"/>
+<result column="invoice_date" property="invoiceDate" jdbcType="VARCHAR"/>
+<result column="pur_name" property="purName" jdbcType="VARCHAR"/>
+
+<result column="pur_amount" property="purAmount" jdbcType="VARCHAR"/>
+<result column="standard_pur_id" property="standardPurId" jdbcType="INTEGER"/>
+<result column="standard_pur_name" property="standardPurName" jdbcType="VARCHAR"/>
+<result column="false_enter_id" property="falseEnterId" jdbcType="INTEGER"/>
+</resultMap>
+
+<resultMap id="falseTeamAIncharge" type="nju.agile.riskmanagement.pojo.FalseTeam">
+<id column="false_team_id" property="falseTeamId" jdbcType="INTEGER"/>
+<result column="incharge_id" property="inchargeId" jdbcType="INTEGER"/>
+<result column="false_team_type" property="falseTeamType" jdbcType="VARCHAR"/>
+
+<association property="falseTeamIncharge" javaType="nju.agile.riskmanagement.pojo.FalseTeamIncharge">
+       <id column="incharge_id" property="inchargeId" jdbcType="INTEGER" />
+        <result column="taxPayer_id" property="taxPayerId" jdbcType="INTEGER" />
+    <result column="incharge_per_name" property="inchargePerName" jdbcType="VARCHAR" />
+    <result column="incharge_per_id" property="inchargePerId" jdbcType="INTEGER" />
+    </association>
+</resultMap>
+
+<resultMap id="falseTeamD" type="nju.agile.riskmanagement.pojo.FalseTeamDetail">
+
+<id column="false_detail_id" property="falseDetailId" jdbcType="INTEGER"/>
+<result column="false_team_id" property="falseTeamId" jdbcType="INTEGER"/>
+
+<result column="taxPayer_id" property="taxPayerId" jdbcType="INTEGER"/>
+<result column="taxPayer_name" property="taxPayerName" jdbcType="VARCHAR"/>
+
+</resultMap>
+
+<select id="getAllFalseEnter" resultMap="falseEnterDetail">
+select *
+from false_enter_info
+</select>
+
+<select id="getPurFalse" parameterType="java.lang.Integer" resultMap="falsePurDetail">
+select *
+from false_pur_info
+where false_enter_id=#{falseEnterId}
+</select>
+
+<select id="getFalseTeamAIncharge" resultMap="falseTeamAIncharge">
+select *
+from false_team f1 
+inner join false_team_incharge f2
+on f1.incharge_id=f2.incharge_id
+</select>
+
+<select id="getFalseTeamD" parameterType="java.lang.Integer" resultMap="falseTeamD">
+select *
+from false_team_detail
+where false_team_id=#{falseTeamId}
+</select>
+</mapper>

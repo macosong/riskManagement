@@ -1,0 +1,26 @@
+spring:
+  datasource:
+    url: jdbc:mysql://172.19.241.75:3306/taxAnalysis?serverTimezone=GMT&useSSL=false
+    username: root
+    password: 123456!aB
+    driver-class-name: com.mysql.jdbc.Driver
+  mvc:
+    view:
+      prefix: /WEB-INF/
+      suffix: .jsp
+server:
+  port: 8090
+
+pagehelper:
+  helper-dialect: mysql
+  reasonable: true
+  support-methods-arguments: true
+  params: count=countSql
+
+#pagehelper:
+#  dialect: mysql
+#  reasonable: true
+#  auto-runtime-dialect: true
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml

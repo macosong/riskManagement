@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="nju.agile.riskmanagement.mapper.BlackListMapper">
+
+<resultMap id="blackMap" type="nju.agile.riskmanagement.pojo.BlackList">
+<id column="black_list_id" property="blackListId" jdbcType="INTEGER"/>
+<result column="taxPayer_id" property="taxPayerId" jdbcType="INTEGER"/>
+<result column="taxPayer_name" property="taxPayerName" jdbcType="VARCHAR"/>
+</resultMap>
+
+<!-- <insert id="upInvoice" parameterType="com.pojo.Invoice_details">
+insert into invoice_details(invoice_id,invoice_date,buyer_taxPayer_id,
+pur_name,pur_amount,pur_sale_date,provider_taxPayer_id)
+
+values (#{invoiceId,jdbcType=INTEGER},#{invoiceDate,jdbcType=VARCHAR},#{buyerTaxPayerId,jdbcType=INTEGER},
+#{purName,jdbcType=VARCHAR},#{purAmount,jdbcType=VARCHAR},#{purSaleDate,jdbcType=VARCHAR},
+#{providerTaxPayerId,jdbcType=INTEGER}
+)
+</insert> -->
+
+<select id="getBlack" resultMap="blackMap" >
+select *
+from black_list
+</select>
+
+</mapper>

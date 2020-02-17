@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="nju.agile.riskmanagement.mapper.MatchMapper">
+
+<resultMap id="matchMap" type="nju.agile.riskmanagement.pojo.MatchDetail">
+<id column="match_id" property="matchId" jdbcType="INTEGER"/>
+<result column="pur_name" property="purName" jdbcType="VARCHAR"/>
+<result column="invoice_id" property="invoiceId" jdbcType="INTEGER"/>
+<result column="match_content" property="matchContent" jdbcType="VARCHAR"/>
+<result column="match_flag" property="matchFlag" jdbcType="INTEGER"/>
+</resultMap>
+<resultMap id="standardMap" type="nju.agile.riskmanagement.pojo.StandardWords">
+<id column="standard_pur_id" property="standardPurId" jdbcType="INTEGER"/>
+<result column="standard_pur_name" property="standardPurName" jdbcType="VARCHAR"/>
+<result column="pur_first_category" property="firstCategory" jdbcType="VARCHAR"/>
+<result column="pur_second_category" property="secondCategory" jdbcType="VARCHAR"/>
+<result column="pur_third_category" property="thirdCategory" jdbcType="VARCHAR"/>
+
+</resultMap>
+
+<resultMap id="invoiceMap" type="nju.agile.riskmanagement.pojo.InvoiceDetails">
+<id column="invoice_id" property="invoiceId" jdbcType="INTEGER"/>
+<result column="invoice_date" property="invoiceDate" jdbcType="VARCHAR"/>
+<result column="buyer_taxPayer_id" property="buyerTaxPayerId" jdbcType="INTEGER"/>
+<result column="pur_name" property="purName" jdbcType="VARCHAR"/>
+<result column="pur_amount" property="purAmount" jdbcType="VARCHAR"/>
+<result column="pur_sale_date" property="purSaleDate" jdbcType="VARCHAR"/>
+<result column="provider_taxPayer_id" property="providerTaxPayerId" jdbcType="INTEGER"/>
+</resultMap>
+
+<select id="getMatchDetail" resultMap="matchMap" >
+select *
+from match_detail
+where match_flag=0
+</select>
+
+
+<update id="upMatchFlag" parameterType="java.lang.Integer">
+update match_detail
+set match_flag=1
+where match_id=#{matchId}
+</update>
+
+<select id="getPurName" parameterType="java.lang.Integer" resultMap="standardMap">
+select *
+from standard_words
+where standard_pur_id in(select standard_id
+from s_and_s
+where simulation_id=#{simulationId})
+</select>
+
+<select id="getInvoice" parameterType="java.lang.Integer" resultMap="invoiceMap">
+select *
+from invoice_details
+where invoice_id=#{invoiceId}
+</select>
+
+<insert id="addToBuy" parameterType="nju.agile.riskmanagement.pojo.LedgerIn">
+insert into ledger_in(ledger_date,taxPayer_id,standard_pur_id,standard_pur_name,pur_amount,invoice_id)
+values(#{ledgerDate,jdbcType=VARCHAR},#{taxPayerId,jdbcType=INTEGER},#{standardPurId,jdbcType=INTEGER},#{standardPurName,jdbcType=VARCHAR},#{purAmount,jdbcType=VARCHAR}
+,#{invoiceId,jdbcType=INTEGER})
+</insert>
+
+<insert id="addToPur" parameterType="nju.agile.riskmanagement.pojo.LedgerOut">
+insert into ledger_out(ledger_date,taxPayer_id,standard_pur_id,standard_pur_name,pur_amount,invoice_id)
+values(#{ledgerDate,jdbcType=VARCHAR},#{taxPayerId,jdbcType=INTEGER},#{standardPurId,jdbcType=INTEGER},
+#{standardPurName,jdbcType=VARCHAR},#{purAmount,jdbcType=VARCHAR}
+,#{invoiceId,jdbcType=INTEGER})
+</insert>
+
+</mapper>

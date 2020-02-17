@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="nju.agile.riskmanagement.mapper.InvoiceMapper">
+
+<resultMap id="invoiceMap" type="nju.agile.riskmanagement.pojo.InvoiceDetails">
+<id column="invoice_id" property="invoiceId" jdbcType="INTEGER"/>
+<result column="invoice_date" property="invoiceDate" jdbcType="VARCHAR"/>
+<result column="buyer_taxPayer_id" property="buyerTaxPayerId" jdbcType="INTEGER"/>
+<result column="pur_name" property="purName" jdbcType="VARCHAR"/>
+<result column="pur_amount" property="purAmount" jdbcType="VARCHAR"/>
+<result column="pur_sale_date" property="purSaleDate" jdbcType="VARCHAR"/>
+<result column="provider_taxPayer_id" property="providerTaxPayerId" jdbcType="INTEGER"/>
+</resultMap>
+
+<insert id="upInvoice" parameterType="nju.agile.riskmanagement.pojo.InvoiceDetails">
+insert into invoice_details(invoice_id,invoice_date,buyer_taxPayer_id,
+pur_name,pur_amount,pur_sale_date,provider_taxPayer_id)
+
+values (#{invoiceId,jdbcType=INTEGER},#{invoiceDate,jdbcType=VARCHAR},#{buyerTaxPayerId,jdbcType=INTEGER},
+#{purName,jdbcType=VARCHAR},#{purAmount,jdbcType=VARCHAR},#{purSaleDate,jdbcType=VARCHAR},
+#{providerTaxPayerId,jdbcType=INTEGER}
+)
+</insert>
+
+<select id="getInvoice" resultMap="invoiceMap" parameterType="java.lang.Integer">
+select *
+from invoice_details
+where buyer_taxPayer_id=#{taxPayerId} or provider_taxPayer_id=#{taxPayerId}
+
+</select>
+
+<insert id="upMatchDetail" parameterType="nju.agile.riskmanagement.pojo.MatchDetail">
+insert into match_detail(pur_name,invoice_id,match_content,match_flag)
+values(#{purName,jdbcType=VARCHAR},#{invoiceId,jdbcType=INTEGER},#{matchContent,jdbcType=VARCHAR},#{matchFlag,jdbcType=INTEGER})
+</insert>
+
+</mapper>

@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="nju.agile.riskmanagement.mapper.UnmatchMapper">
+
+<resultMap id="unmatchMap" type="nju.agile.riskmanagement.pojo.NotMatchInfo">
+<id column="not_match_id" property="notMatchId" jdbcType="INTEGER"/>
+<result column="taxPayer_id" property="taxPayerId" jdbcType="INTEGER"/>
+<result column="compare_month" property="compareDate" jdbcType="VARCHAR"/>
+<result column="compare_result" property="compareResult" jdbcType="VARCHAR"/>
+<result column="standard_pur_id" property="standardPurId" jdbcType="INTEGER"/>
+<result column="standard_pur_name" property="standardPurName" jdbcType="VARCHAR"/>
+<result column="pur_amount" property="purAmount" jdbcType="VARCHAR"/>
+<result column="buy_amount" property="buyAmount" jdbcType="VARCHAR"/>
+<result column="this_total_sale" property="thisTotalSale" jdbcType="VARCHAR"/>
+<result column="this_total_buy" property="thisTotalBuy" jdbcType="VARCHAR"/>
+<result column="risk_check_flag" property="riskCheckFlag" jdbcType="VARCHAR"/>
+<result column="risk_check_result" property="riskCheckResult" jdbcType="VARCHAR"/>
+</resultMap>
+
+<resultMap id="ledgerInMap" type="nju.agile.riskmanagement.pojo.LedgerIn">
+<id column="ledger_in_id" property="ledgerInId" jdbcType="INTEGER"/>
+<result column="ledger_date" property="ledgerDate" jdbcType="VARCHAR"/>
+<result column="taxPayer_id" property="taxPayerId" jdbcType="INTEGER"/>
+<result column="standard_pur_id" property="standardPurId" jdbcType="INTEGER"/>
+<result column="standard_pur_name" property="standardPurName" jdbcType="VARCHAR"/>
+<result column="pur_amount" property="purAmount" jdbcType="VARCHAR"/>
+<result column="invoice_id" property="invoiceId" jdbcType="INTEGER"/>
+</resultMap>
+
+<resultMap id="ledgerOutMap" type="nju.agile.riskmanagement.pojo.LedgerOut">
+<id column="ledger_out_id" property="ledgerOutId" jdbcType="INTEGER"/>
+<result column="ledger_date" property="ledgerDate" jdbcType="VARCHAR"/>
+<result column="taxPayer_id" property="taxPayerId" jdbcType="INTEGER"/>
+<result column="standard_pur_id" property="standardPurId" jdbcType="INTEGER"/>
+<result column="standard_pur_name" property="standardPurName" jdbcType="VARCHAR"/>
+<result column="pur_amount" property="purAmount" jdbcType="VARCHAR"/>
+<result column="invoice_id" property="invoiceId" jdbcType="INTEGER"/>
+</resultMap>
+
+<resultMap id="unInvoiceMap" type="nju.agile.riskmanagement.pojo.InvoiceDetails">
+<id column="invoice_id" property="invoiceId" jdbcType="INTEGER"/>
+<result column="invoice_date" property="invoiceDate" jdbcType="VARCHAR"/>
+<result column="buyer_taxPayer_id" property="buyerTaxPayerId" jdbcType="INTEGER"/>
+<result column="pur_name" property="purName" jdbcType="VARCHAR"/>
+<result column="pur_amount" property="purAmount" jdbcType="VARCHAR"/>
+<result column="pur_sale_date" property="purSaleDate" jdbcType="VARCHAR"/>
+<result column="provider_taxPayer_id" property="providerTaxPayerId" jdbcType="INTEGER"/>
+</resultMap>
+
+<resultMap id="falseEnter" type="nju.agile.riskmanagement.pojo.FalseEnterInfo">
+<id column="false_enter_id" property="falseEnterId" jdbcType="INTEGER"/>
+<result column="taxPayer_id" property="taxPayerId" jdbcType="INTEGER"/>
+<result column="taxPayer_name" property="taxPayerName" jdbcType="VARCHAR"/>
+<result column="false_month" property="falseMonth" jdbcType="VARCHAR"/>
+<result column="false_amount" property="falseAmount" jdbcType="VARCHAR"/>
+</resultMap>
+
+<resultMap id="blackName" type="nju.agile.riskmanagement.pojo.EnterpriseInfo" >
+    <id column="taxPayer_id" property="taxPayerId" jdbcType="INTEGER" />
+    <result column="taxPayer_name" property="taxPayerName" jdbcType="VARCHAR" />
+    <result column="enter_address" property="enterAddress" jdbcType="VARCHAR" />
+    <result column="tax_log_date" property="taxLogDate" jdbcType="DATE" />
+    <result column="tax_authority_name" property="taxAuthorityName" jdbcType="VARCHAR" />
+     <result column="adm_region" property="admRegion" jdbcType="VARCHAR" />
+      <result column="legal_rep_name" property="legalRepName" jdbcType="VARCHAR" />
+       <result column="legal_rep_id" property="legalRepId" jdbcType="INTEGER" />
+        <result column="financial_per_name" property="financialPerName" jdbcType="VARCHAR" />
+         <result column="financial_per_id" property="financialPerId" jdbcType="INTEGER" />
+          
+  </resultMap>
+  
+  <resultMap id="incharge" type="nju.agile.riskmanagement.pojo.FalseTeamIncharge">
+  <id column="incharge_id" property="inchargeId" jdbcType="INTEGER"/>
+<result column="taxPayer_id" property="taxPayerId" jdbcType="INTEGER"/>
+<result column="incharge_per_name" property="inchargePerName" jdbcType="VARCHAR"/>
+<result column="incharge_per_id" property="inchargePerId" jdbcType="INTEGER"/>
+  </resultMap>
+  
+  <resultMap id="falseTeam" type="nju.agile.riskmanagement.pojo.FalseTeam">
+  <id column="false_team_id" property="falseTeamId" jdbcType="INTEGER"/>
+<result column="incharge_id" property="inchargeId" jdbcType="INTEGER"/>
+<result column="false_team_type" property="falseTeamType" jdbcType="VARCHAR"/>
+  </resultMap>
+
+<select id="getAllUnmatch" resultMap="unmatchMap">
+select *
+from not_match_info
+</select>
+
+<update id="checkUnmatchResult" parameterType="nju.agile.riskmanagement.pojo.NotMatchInfo">
+update not_match_info
+set risk_check_result = #{riskCheckResult},risk_check_flag="Y"
+where not_match_id =#{notMatchId}
+</update>
+
+<insert id="addToFalseEnter" parameterType="nju.agile.riskmanagement.pojo.FalseEnterInfo">
+insert into false_enter_info(taxPayer_id,taxPayer_name,false_month,false_amount)
+values(#{taxPayerId,jdbcType=INTEGER},#{taxPayerName,jdbcType=VARCHAR},#{falseMonth,jdbcType=VARCHAR},#{falseAmount,jdbcType=VARCHAR})
+</insert>
+
+<select id="getFalseEnter" resultMap="falseEnter">
+select *
+from false_enter_info
+where taxPayer_id=#{taxPayerId} and false_month = #{month}
+</select>
+
+<select id="getInInvoice" resultMap="ledgerInMap">
+select *
+from ledger_in
+where taxPayer_id=#{taxPayerId} and standard_pur_id=#{standardPurId}
+</select>
+
+<select id="getOutInvoice" resultMap="ledgerOutMap">
+select *
+from ledger_out
+where taxPayer_id=#{taxPayerId} and standard_pur_id=#{standardPurId}
+</select>
+
+<select id="getInvoice" resultMap="unInvoiceMap" parameterType="java.lang.Integer">
+select *
+from invoice_details
+where invoice_id=#{invoiceId}
+</select>
+
+<insert id="addToPurFalse" parameterType="nju.agile.riskmanagement.pojo.FalsePurInfo">
+insert into false_pur_info(taxPayer_id,invoice_id,invoice_date,pur_name,pur_amount,standard_pur_id,standard_pur_name,false_enter_id)
+values(#{taxPayerId,jdbcType=INTEGER},#{invoiceId,jdbcType=INTEGER},#{invoiceDate,jdbcType=VARCHAR},#{purName,jdbcType=VARCHAR},
+#{purAmount,jdbcType=VARCHAR},#{standardPurId,jdbcType=INTEGER},#{standardPurName,jdbcType=VARCHAR},#{falseEnterId,jdbcType=INTEGER})
+</insert>
+
+<select id="getBlackName" resultMap="blackName" parameterType="java.lang.Integer">
+select *
+   from enterprise_info
+   
+   where taxPayer_id =#{taxPayerId}
+</select>
+
+<insert id="addToBlack" parameterType="nju.agile.riskmanagement.pojo.BlackList">
+insert into black_list(taxPayer_id,taxPayer_name)
+values(#{taxPayerId,jdbcType=INTEGER},#{taxPayerName,jdbcType=VARCHAR})
+</insert>
+
+<select id="getOtherEnter" resultMap="blackName" parameterType="java.lang.Integer">
+select *
+   from enterprise_info
+   
+   where taxPayer_id &lt;&gt; #{taxPayerId}
+</select>
+
+<insert id="addTeamIncharge" parameterType="nju.agile.riskmanagement.pojo.FalseTeamIncharge">
+insert into false_team_incharge(incharge_per_id,incharge_per_name,taxPayer_id)
+values(#{inchargePerId,jdbcType=INTEGER},#{inchargePerName,jdbcType=VARCHAR},#{taxPayerId,jdbcType=INTEGER})
+</insert>
+
+<select id="getLatestId" resultMap="incharge" >
+select *
+from false_team_incharge
+order by incharge_id desc limit 1
+</select>
+
+<insert id="addFalseTeam" parameterType="nju.agile.riskmanagement.pojo.FalseTeam">
+insert into false_team(false_team_type,incharge_id)
+values(#{falseTeamType,jdbcType=VARCHAR},#{inchargeId,jdbcType=INTEGER})
+</insert>
+
+<select id="getFalseTeamId" resultMap="falseTeam" >
+select *
+from false_team
+order by false_team_id desc limit 1
+</select>
+
+<insert id="addTeamDetail" parameterType="nju.agile.riskmanagement.pojo.FalseTeamDetail">
+insert into false_team_detail(false_team_id,taxPayer_id,taxPayer_name)
+values(#{falseTeamId,jdbcType=INTEGER},#{taxPayerId,jdbcType=INTEGER},#{taxPayerName,jdbcType=VARCHAR})
+</insert>
+
+</mapper>

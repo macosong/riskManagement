@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="nju.agile.riskmanagement.mapper.SimulationMapper">
+
+<resultMap id="simulationMap" type="nju.agile.riskmanagement.pojo.SimulationWords">
+<id column="simulation_word_id" property="simulationId" jdbcType="INTEGER"/>
+<result column="simulation_pur_name" property="simulationName" jdbcType="VARCHAR"/>
+
+</resultMap>
+
+<select id="getSimulation" resultMap="simulationMap" >
+select *
+from simulation_words
+</select>
+
+<delete id="delSimulation" parameterType="java.lang.Integer">
+delete from simulation_words
+    where simulation_word_id = #{simulationId,jdbcType=INTEGER}
+</delete> 
+
+<update id="editSimulation" parameterType="nju.agile.riskmanagement.pojo.SimulationWords">
+update simulation_words
+set simulation_pur_name=#{simulationName}
+where simulation_word_id=#{simulationId}
+
+</update>
+
+
+<insert id="addSimulation" parameterType="nju.agile.riskmanagement.pojo.SimulationWords">
+insert into simulation_words(simulation_pur_name)
+values(#{simulationName,jdbcType=VARCHAR})
+</insert>
+
+</mapper>

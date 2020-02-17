@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="nju.agile.riskmanagement.mapper.StandardMapper">
+
+<resultMap id="standardMap" type="nju.agile.riskmanagement.pojo.StandardWords">
+<id column="standard_pur_id" property="standardPurId" jdbcType="INTEGER"/>
+<result column="standard_pur_name" property="standardPurName" jdbcType="VARCHAR"/>
+<result column="pur_first_category" property="firstCategory" jdbcType="VARCHAR"/>
+<result column="pur_second_category" property="secondCategory" jdbcType="VARCHAR"/>
+<result column="pur_third_category" property="thirdCategory" jdbcType="VARCHAR"/>
+
+</resultMap>
+
+<select id="getStandard" resultMap="standardMap" >
+select *
+from standard_words
+</select>
+
+<delete id="delStandard" parameterType="java.lang.Integer">
+delete from standard_words
+    where standard_pur_id = #{standardPurId,jdbcType=INTEGER}
+</delete>
+
+<update id="editStandard" parameterType="nju.agile.riskmanagement.pojo.StandardWords">
+update standard_words
+set standard_pur_name=#{standardPurName},
+pur_first_category=#{firstCategory},
+pur_second_category=#{secondCategory},
+pur_third_category=#{thirdCategory}
+where standard_pur_id=#{standardPurId}
+
+</update>
+
+<insert id="addMatch" parameterType="nju.agile.riskmanagement.pojo.SAndS">
+insert into s_and_s(standard_id,simulation_id)
+values(#{standardId,jdbcType=INTEGER}, #{simulationId,jdbcType=INTEGER})
+</insert>
+
+<insert id="addStandard" parameterType="nju.agile.riskmanagement.pojo.StandardWords">
+insert into standard_words(standard_pur_name,pur_first_category,pur_second_category,pur_third_category)
+values(#{standardPurName,jdbcType=VARCHAR},#{firstCategory,jdbcType=VARCHAR},#{secondCategory,jdbcType=VARCHAR},#{thirdCategory,jdbcType=VARCHAR})
+</insert>
+
+</mapper>

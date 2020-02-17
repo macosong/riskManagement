@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="nju.agile.riskmanagement.mapper.LedgerMapper">
+
+<resultMap id="buyMap" type="nju.agile.riskmanagement.pojo.LedgerIn">
+<id column="ledger_in_id" property="ledgerInId" jdbcType="INTEGER"/>
+<result column="ledger_date" property="ledgerDate" jdbcType="VARCHAR"/>
+<result column="taxPayer_id" property="taxPayerId" jdbcType="INTEGER"/>
+<result column="standard_pur_id" property="standardPurId" jdbcType="INTEGER"/>
+<result column="standard_pur_name" property="standardPurName" jdbcType="VARCHAR"/>
+<result column="pur_amount" property="purAmount" jdbcType="VARCHAR"/>
+<result column="invoice_id" property="invoiceId" jdbcType="INTEGER"/>
+</resultMap>
+
+<resultMap id="purMap" type="nju.agile.riskmanagement.pojo.LedgerOut">
+<id column="ledger_out_id" property="ledgerOutId" jdbcType="INTEGER"/>
+<result column="ledger_date" property="ledgerDate" jdbcType="VARCHAR"/>
+<result column="taxPayer_id" property="taxPayerId" jdbcType="INTEGER"/>
+<result column="standard_pur_id" property="standardPurId" jdbcType="INTEGER"/>
+<result column="standard_pur_name" property="standardPurName" jdbcType="VARCHAR"/>
+<result column="pur_amount" property="purAmount" jdbcType="VARCHAR"/>
+<result column="invoice_id" property="invoiceId" jdbcType="INTEGER"/>
+</resultMap>
+
+<resultMap id="allEnterDetailMap" type="nju.agile.riskmanagement.pojo.EnterpriseInfo" >
+    <id column="taxPayer_id" property="taxPayerId" jdbcType="INTEGER" />
+    <result column="taxPayer_name" property="taxPayerName" jdbcType="VARCHAR" />
+    <result column="enter_address" property="enterAddress" jdbcType="VARCHAR" />
+    <result column="tax_log_date" property="taxLogDate" jdbcType="DATE" />
+    <result column="tax_authority_name" property="taxAuthorityName" jdbcType="VARCHAR" />
+     <result column="adm_region" property="admRegion" jdbcType="VARCHAR" />
+      <result column="legal_rep_name" property="legalRepName" jdbcType="VARCHAR" />
+       <result column="legal_rep_id" property="legalRepId" jdbcType="INTEGER" />
+        <result column="financial_per_name" property="financialPerName" jdbcType="VARCHAR" />
+         <result column="financial_per_id" property="financialPerId" jdbcType="INTEGER" />
+  </resultMap>
+  
+  <resultMap id="standardPurMap" type="nju.agile.riskmanagement.pojo.StandardWords">
+<id column="standard_pur_id" property="standardPurId" jdbcType="INTEGER"/>
+<result column="standard_pur_name" property="standardPurName" jdbcType="VARCHAR"/>
+<result column="pur_first_category" property="firstCategory" jdbcType="VARCHAR"/>
+<result column="pur_second_category" property="secondCategory" jdbcType="VARCHAR"/>
+<result column="pur_third_category" property="thirdCategory" jdbcType="VARCHAR"/>
+
+</resultMap>
+
+<select id="getBuy" resultMap="buyMap" parameterType="java.lang.Integer">
+select *
+from ledger_in
+where taxPayer_id=#{taxPayerId}
+</select>
+
+<select id="getPur" resultMap="purMap" parameterType="java.lang.Integer">
+select *
+from ledger_out
+where taxPayer_id=#{taxPayerId}
+</select>
+
+<select id="getAllEnterInfo" resultMap="allEnterDetailMap">
+select *
+from enterprise_info
+</select>
+
+<select id="getPurName" parameterType="java.lang.Integer" resultMap="standardPurMap">
+select *
+from standard_words
+where standard_pur_id=#{standardPurId}
+</select>
+
+<insert id="addToNotMatch" parameterType="nju.agile.riskmanagement.pojo.NotMatchInfo">
+insert into not_match_info(taxPayer_id,compare_month,compare_result,
+standard_pur_name,pur_amount,buy_amount,this_total_sale,this_total_buy,
+risk_check_flag,standard_pur_id)
+values(#{taxPayerId,jdbcType=INTEGER},#{compareDate,jdbcType=VARCHAR},#{compareResult,jdbcType=VARCHAR},
+#{standardPurName,jdbcType=VARCHAR},#{purAmount,jdbcType=VARCHAR},#{buyAmount,jdbcType=VARCHAR},#{thisTotalSale,jdbcType=VARCHAR},
+#{thisTotalBuy,jdbcType=VARCHAR},
+#{riskCheckFlag,jdbcType=VARCHAR},#{standardPurId,jdbcType=INTEGER})
+</insert>
+</mapper>
