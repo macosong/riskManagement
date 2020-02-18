@@ -14,12 +14,6 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * StandardController
- *
- * @author: songqiang
- * @date: 2020/2/16
- */
 @Controller
 public class StandardController {
 
@@ -52,7 +46,7 @@ public class StandardController {
 
         standardService.delStandard(standardPurId);
 
-        return "redirect:view_standard.jsp";
+        return "redirect:view_standard";
     }
 
     /*
@@ -63,7 +57,7 @@ public class StandardController {
 
         standardService.editStandard(standard_words);
 
-        return "redirect:view_standard.jsp";
+        return "redirect:view_standard";
 
     }
     /*
@@ -74,7 +68,7 @@ public class StandardController {
 
         standardService.addMatch(s_and_S);
 
-        return "redirect:view_standard.jsp";
+        return "redirect:view_standard";
 
     }
     /*
@@ -85,7 +79,7 @@ public class StandardController {
 
         standardService.addStandard(standard_words);
 
-        return "redirect:view_standard.jsp";
+        return "redirect:view_standard";
     }
 
 }

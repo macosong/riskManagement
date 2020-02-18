@@ -12,12 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-/**
- * FalseService
- *
- * @author: songqiang
- * @date: 2020/2/16
- */
 @Service
 @Transactional
 public class FalseService {

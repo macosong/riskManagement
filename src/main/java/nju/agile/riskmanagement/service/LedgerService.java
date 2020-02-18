@@ -12,12 +12,6 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 
-/**
- * LedgerService
- *
- * @author: songqiang
- * @date: 2020/2/16
- */
 @Service
 @Transactional
 public class LedgerService {

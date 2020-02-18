@@ -5,23 +5,23 @@
 <head>
     <meta charset="UTF-8">
     <title>登录</title>
-    <script src="./tax_risk/js/jquery.js"></script>
+    <script src="/tax_risk/js/jquery.js"></script>
     <link
-            href="./css/bootstrap.min.css"
+            href="/css/bootstrap.min.css"
             rel="stylesheet">
     <link
-            href="./tax_risk/css/font-awesome/css/font-awesome.min.css"
+            href="/tax_risk/css/font-awesome/css/font-awesome.min.css"
             rel="stylesheet">
     <script
-            src="./js/bootstrap.min.js"></script>
+            src="/js/bootstrap.min.js"></script>
     <script type="text/javascript"
-            src="./tax_risk/js/Validform/js/Validform_v5.3.2.js"></script>
-    <link rel="stylesheet" href="./tax_risk/css/style.css">
-    <link rel="stylesheet" type="text/css" href="css/base.css" />
+            src="/tax_risk/js/Validform/js/Validform_v5.3.2.js"></script>
+    <link rel="stylesheet" href="/tax_risk/css/style.css">
+    <link rel="stylesheet" type="text/css" href="/css/base.css" />
 
     <script language="javascript" type="text/javascript">
         function goToRegister() {
-        	window.location.href="register.jsp";
+        	window.location.href="register";
           
 
         }

@@ -11,8 +11,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 @Controller
 public class TestController {
-    @RequestMapping("/login")
+    @RequestMapping("/test")
     public String hello(){
-        return "login";
+        return "admin_index";
     }
+
+//    @RequestMapping("/admin_index")
+//    public String test() { return "admin_index"; }
 }

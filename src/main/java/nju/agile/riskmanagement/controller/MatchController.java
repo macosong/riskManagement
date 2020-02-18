@@ -13,12 +13,6 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * MatchController
- *
- * @author: songqiang
- * @date: 2020/2/16
- */
 @Controller
 public class MatchController {
     @Autowired
@@ -45,6 +39,6 @@ public class MatchController {
 
         matchService.checkWords(match_detail);
 
-        return "redirect:admin_index.jsp";
+        return "redirect:admin_index";
     }
 }

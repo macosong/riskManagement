@@ -9,12 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
 
-/**
- * AdminLogController
- *
- * @author: songqiang
- * @date: 2020/2/16
- */
 @Controller
 public class AdminLogController {
     @Autowired
@@ -42,7 +36,7 @@ public class AdminLogController {
         }
 
         req.getSession().setAttribute("admin_ID", admin_info2.getAdminId());
-        return "redirect:admin_index.jsp";
+        return "redirect:admin_index";
 
 
     }
@@ -52,7 +46,6 @@ public class AdminLogController {
     public String addAdmin(AdminInfo admin_info) {
 
         adminLogService.addAdmin(admin_info);
-
-        return "redirect:add_admin.jsp";
+        return "redirect:add_admin";
     }
 }

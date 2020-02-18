@@ -9,12 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-/**
- * BlackListServce
- *
- * @author: songqiang
- * @date: 2020/2/16
- */
 @Service
 @Transactional
 public class BlackListService {

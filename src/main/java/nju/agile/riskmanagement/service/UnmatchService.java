@@ -11,12 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * UnmatchService
- *
- * @author: songqiang
- * @date: 2020/2/16
- */
 @Service
 @Transactional
 public class UnmatchService {

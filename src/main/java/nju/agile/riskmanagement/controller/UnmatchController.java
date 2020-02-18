@@ -13,12 +13,6 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * UnmatchController
- *
- * @author: songqiang
- * @date: 2020/2/16
- */
 @Controller
 public class UnmatchController {
 
@@ -52,6 +46,6 @@ public class UnmatchController {
 
         unmatchService.checkUnmatchResult(not_match_info);
 
-        return "redirect:view_unmatch.jsp";
+        return "redirect:view_unmatch";
     }
 }

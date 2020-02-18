@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="nju.agile.riskmanagement.FalseMapper">
+<mapper namespace="nju.agile.riskmanagement.mapper.FalseMapper">
 
 <resultMap id="falseEnterDetail" type="nju.agile.riskmanagement.pojo.FalseEnterInfo">
 <id column="false_enter_id" property="falseEnterId" jdbcType="INTEGER"/>
@@ -28,7 +28,7 @@
 <result column="incharge_id" property="inchargeId" jdbcType="INTEGER"/>
 <result column="false_team_type" property="falseTeamType" jdbcType="VARCHAR"/>
 
-<association property="falseTeamIncharge" javaType="nju.agile.riskmanagement.pojo.FalseTeamIncharge">
+    <association property="falseTeamIncharge" javaType="nju.agile.riskmanagement.pojo.FalseTeamIncharge">
        <id column="incharge_id" property="inchargeId" jdbcType="INTEGER" />
         <result column="taxPayer_id" property="taxPayerId" jdbcType="INTEGER" />
     <result column="incharge_per_name" property="inchargePerName" jdbcType="VARCHAR" />

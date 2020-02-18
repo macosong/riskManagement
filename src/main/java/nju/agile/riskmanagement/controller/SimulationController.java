@@ -13,12 +13,6 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * SimulationController
- *
- * @author: songqiang
- * @date: 2020/2/16
- */
 @Controller
 public class SimulationController {
     @Autowired
@@ -50,7 +44,7 @@ public class SimulationController {
 
         simulationService.editSimulation(simulation_words);
 
-        return "redirect:view_simulation.jsp";
+        return "redirect:view_simulation";
     }
 
     /*
@@ -60,7 +54,7 @@ public class SimulationController {
     public String addSimulation(SimulationWords simulation_words) {
         simulationService.addSimulation(simulation_words);
 
-        return "redirect:view_simulation.jsp";
+        return "redirect:view_simulation";
     }
 
     /*
@@ -71,6 +65,6 @@ public class SimulationController {
 
         simulationService.delSimulation(simulationId);
 
-        return "redirect:view_simulation.jsp";
+        return "redirect:view_simulation";
     }
 }

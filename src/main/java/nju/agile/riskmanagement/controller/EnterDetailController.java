@@ -9,12 +9,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 
-/**
- * EnterDetailController
- *
- * @author: songqiang
- * @date: 2020/2/16
- */
 @Controller
 public class EnterDetailController {
     @Autowired
@@ -42,7 +36,7 @@ public class EnterDetailController {
 
         enterDetailService.editEnterDetail(enterprise_info);
 
-        return "redirect:enter_index.jsp";
+        return "redirect:enter_index";
     }
 
     /*
@@ -55,6 +49,6 @@ public class EnterDetailController {
 
         enterDetailService.enterRegister(enterprise_info);
 
-        return "redirect:login.jsp";
+        return "redirect:login";
     }
 }

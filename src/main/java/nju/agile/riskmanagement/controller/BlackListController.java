@@ -13,12 +13,6 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * BlackListController
- *
- * @author: songqiang
- * @date: 2020/2/16
- */
 @Controller
 public class BlackListController {
     @Autowired

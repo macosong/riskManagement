@@ -13,12 +13,6 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * InvoiceController
- *
- * @author: songqiang
- * @date: 2020/2/16
- */
 @Controller
 public class InvoiceController {
     @Autowired
@@ -37,7 +31,7 @@ public class InvoiceController {
          */
         invoiceService.match(invoice_details);
 
-        return "redirect:up_invoice.jsp";
+        return "redirect:up_invoice";
     }
 
     /*

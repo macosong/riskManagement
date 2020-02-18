@@ -14,12 +14,6 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * LedgerController
- *
- * @author: songqiang
- * @date: 2020/2/16
- */
 @Controller
 public class LedgerController {
     @Autowired
@@ -73,7 +67,7 @@ public class LedgerController {
     public String checkAllAccount() {
         ledgerService.checkAllAccount();
 
-        return "redirect:view_unmatch.jsp";
+        return "redirect:view_unmatch";
     }
 
 }

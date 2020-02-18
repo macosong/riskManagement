@@ -16,12 +16,6 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * FalseController
- *
- * @author: songqiang
- * @date: 2020/2/16
- */
 @Controller
 public class FalseController {
     @Autowired

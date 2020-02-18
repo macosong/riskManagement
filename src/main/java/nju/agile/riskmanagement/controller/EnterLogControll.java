@@ -9,12 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
 
-/**
- * EnterLogControll
- *
- * @author: songqiang
- * @date: 2020/2/16
- */
 @Controller
 public class EnterLogControll {
     @Autowired
@@ -46,7 +40,7 @@ public class EnterLogControll {
         }
 
         req.getSession().setAttribute("enter_ID", taxPayerId);
-        return "redirect:enter_index.jsp";
+        return "redirect:enter_index";
 
     }
 }
