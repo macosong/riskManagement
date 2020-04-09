@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="nju.agile.riskmanagement.mapper.EnterLogMappe" >
+<mapper namespace="nju.agile.riskmanagement.mapper.EnterLogMapper" >
 
  <resultMap id="LogResultMap" type="nju.agile.riskmanagement.pojo.EnterLog" >
     <id column="enter_log_id" property="enterLogId" jdbcType="INTEGER" />
@@ -13,7 +13,7 @@
    from enter_log_info
    where taxPayer_id =#{taxPayerId}
   </select>
-  
+
   <select id="checkExists" resultType="java.lang.Integer" parameterType="java.lang.Integer">
   select count(*)
    from enter_log_info
